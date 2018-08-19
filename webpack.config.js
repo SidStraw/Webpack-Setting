@@ -1,5 +1,6 @@
 const path = require('path');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
+const htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: path.resolve(__dirname, "src", "index.js"),
@@ -13,7 +14,11 @@ module.exports = {
         port: 4000
     },
     plugins: [ //插件設定，以陣列型態設定
-        new miniCssExtractPlugin({ filename: "bundle.css" })
+        new miniCssExtractPlugin({ filename: "bundle.css" }),
+        new htmlWebpackPlugin({
+            template: path.resolve(__dirname, "src", "html", "index.html"),
+            filename: "index.html"
+        })
     ],
     module: {
         rules: [ //模組使用的規則，以陣列來設定
