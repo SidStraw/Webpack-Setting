@@ -15,6 +15,7 @@ notebook: 10前端筆記
 5. `npm i -D css-loader sass-loader style-loader node-sass` 安裝CSS與SASS處理器並設定 `webpack.config.js`
 6. `npm i -D mini-css-extract-plugin` 安裝掛件將 CSS 獨立成一支檔案
 7. `npm i -D html-webpack-plugin` 安裝HTML管理掛件
+8. `npm i -D ejs-loader` 為了將HTML模組化而使用 ejs ，達成在 HTML 中透過 `<%= ... %>` 快速使用 JS 的功能
 
 
 

@@ -17,13 +17,14 @@ module.exports = {
         new miniCssExtractPlugin({ filename: "bundle.css" }),
         new htmlWebpackPlugin({
             template: path.resolve(__dirname, "src", "html", "index.html"),
-            filename: "index.html"
+            filename: "index.html",
+            title: "我是標題"
         })
     ],
     module: {
         rules: [ //模組使用的規則，以陣列來設定
             {
-                test: /.js$/, //執行條件，可用正規表達式設定
+                test: /\.js$/, //執行條件，可用正規表達式設定
                 use: { //設定執行動作
                     loader: "babel-loader",
                     options: {
@@ -32,10 +33,14 @@ module.exports = {
                 }
             },
             {
-                test: /.s?css$/,
+                test: /\.s?css$/,
                 use: [
                     "style-loader", miniCssExtractPlugin.loader, "css-loader", "sass-loader"
                 ]
+            },
+            {
+                test: /\.ejs$/,
+                loader: "ejs-loader"
             }
         ]
     }
