@@ -1,1 +1,2 @@
-console.log('helle would.')
+const test = () => console.log("ES6 test");
+test();
