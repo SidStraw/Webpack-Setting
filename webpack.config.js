@@ -1,6 +1,7 @@
 const path = require('path');
 const miniCssExtractPlugin = require('mini-css-extract-plugin');
 const htmlWebpackPlugin = require('html-webpack-plugin');
+const webpackSpritesmith = require('webpack-spritesmith');
 
 module.exports = {
     entry: path.resolve(__dirname, "src", "index.js"),
@@ -19,6 +20,19 @@ module.exports = {
             template: path.resolve(__dirname, "src", "html", "index.html"),
             filename: "index.html",
             title: "我是標題"
+        }),
+        new webpackSpritesmith({
+            src: {
+                cwd: path.resolve(__dirname, "src", "icon"),
+                glob: "*.png"
+            },
+            target: {
+                image: path.resolve(__dirname, "src", "sprite", "sprite.png"),
+                css: path.resolve(__dirname, "src", "sprite", "sprite.css")
+            },
+            apiOptions: {
+                cssImageRef: "sprite.png"
+            }
         })
     ],
     module: {
@@ -41,6 +55,19 @@ module.exports = {
             {
                 test: /\.ejs$/,
                 loader: "ejs-loader"
+            },
+            {
+                test: /\.(jpe?g|svg|png|gif)$/i,
+                use: [{
+                        loader: "file-loader",
+                        options: {
+                            outputPath: "img/",
+                            publicPath: "img/",
+                            name: "[name]-[hash].[ext]"
+                        }
+                    },
+                    { loader: "image-webpack-loader" }
+                ]
             }
         ]
     }
